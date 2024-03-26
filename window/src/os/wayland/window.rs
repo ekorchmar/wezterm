@@ -53,6 +53,11 @@ use super::copy_and_paste::CopyAndPaste;
 use super::pointer::{PendingMouse, PointerUserData};
 use super::state::WaylandState;
 
+use wayland_protocols_plasma::blur::client::{
+    org_kde_kwin_blur::OrgKdeKwinBlur, org_kde_kwin_blur_manager::OrgKdeKwinBlurManager,
+};
+
+
 #[derive(Debug)]
 pub(super) struct KeyRepeatState {
     pub(super) when: Instant,

@@ -15,7 +15,7 @@ k9 = "0.11.0"
 gl_generator = "0.14"
 
 [features]
-wayland = ["wayland-client", "smithay-client-toolkit", "wayland-egl", "wayland-protocols"]
+wayland = ["wayland-client", "smithay-client-toolkit", "wayland-egl", "wayland-protocols", "wayland-protocols-plasma"]
 
 [dependencies]
 async-channel = "1.6"
@@ -85,6 +85,7 @@ smithay-client-toolkit = {version = "0.17.0", default-features=false, optional=t
 wayland-protocols = {version="0.30", optional=true}
 wayland-client = {version="0.30", optional=true}
 wayland-egl = {version="0.30", optional=true}
+wayland-protocols-plasma = {version="0.2.0", features=["client"], optional=true}
 
 [target.'cfg(target_os="macos")'.dependencies]
 cocoa = "0.25"
