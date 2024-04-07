@@ -322,6 +322,10 @@ impl WaylandWindow {
             windows.borrow_mut().insert(window_id, inner.clone());
         };
 
+        if config::configuration().wayland_kwin_blur {
+            !todo!();
+        }
+
         wait_configure.recv().await?;
 
         Ok(window_handle)

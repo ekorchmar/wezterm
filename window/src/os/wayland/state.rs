@@ -36,6 +36,8 @@ use wayland_protocols::wp::primary_selection::zv1::client::zwp_primary_selection
 use wayland_protocols::wp::text_input::zv3::client::zwp_text_input_manager_v3::ZwpTextInputManagerV3;
 use wayland_protocols::wp::text_input::zv3::client::zwp_text_input_v3::ZwpTextInputV3;
 
+use wayland_protocols_plasma::blur::client::org_kde_kwin_blur_manager::OrgKdeKwinBlurManager;
+
 use crate::x11::KeyboardWithFallback;
 
 use super::copy_and_paste::{PrimarySelectionManagerData, PrimarySelectionManagerState};
@@ -75,6 +77,8 @@ pub(super) struct WaylandState {
     pub(super) primary_selection_source: Option<(ZwpPrimarySelectionSourceV1, String)>,
     pub(super) shm: Shm,
     pub(super) mem_pool: RefCell<SlotPool>,
+
+    pub(super) wayland_kwin_blur_manager: Option<OrgKdeKwinBlurManager>,
 }
 
 impl WaylandState {
@@ -97,6 +101,7 @@ impl WaylandState {
             } else {
                 None
             },
+            wayland_kwin_blur_manager: globals.bind(qh, 1..=1, GlobalData).ok(),
             windows: RefCell::new(HashMap::new()),
             seat: SeatState::new(globals, qh),
             xdg: XdgShell::bind(globals, qh)?,
@@ -190,3 +195,4 @@ delegate_dispatch!(WaylandState: [ZwpPrimarySelectionDeviceManagerV1: GlobalData
 delegate_dispatch!(WaylandState: [ZwpPrimarySelectionDeviceV1: PrimarySelectionManagerData] => PrimarySelectionManagerState);
 delegate_dispatch!(WaylandState: [ZwpPrimarySelectionSourceV1: PrimarySelectionManagerData] => PrimarySelectionManagerState);
 delegate_dispatch!(WaylandState: [ZwpPrimarySelectionOfferV1: PrimarySelectionManagerData] => PrimarySelectionManagerState);
+
