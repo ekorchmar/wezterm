@@ -492,6 +492,9 @@ pub struct Config {
     pub enable_wayland: bool,
     #[dynamic(default)]
     pub enable_zwlr_output_manager: bool,
+    /// Controls if we request KWin on Wayland to blur behind the window
+    #[dynamic(default)]
+    pub wayland_kwin_blur: bool,
 
     /// Whether to prefer EGL over other GL implementations.
     /// EGL on Windows has jankier resize behavior than WGL (which
